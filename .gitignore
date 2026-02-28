@@ -230,3 +230,6 @@ data/*.db
 data/*.index
 data/**/*.npy
 data/**/*.ids.json
+
+# Local debug dumps
+bubbleOne-output.txt

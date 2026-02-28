@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 
 import { AuditChain } from "../audit/chain";
 import { MLClient } from "../clients/mlClient";
@@ -62,19 +62,28 @@ function buildDraft(alias: string, recommendation: string): string {
   return `Hey ${alias}, quick check-in from bubbleOne. ${recommendation}`;
 }
 
+type AsyncRoute = (req: Request, res: Response, next: NextFunction) => Promise<void>;
+
+function asyncRoute(handler: AsyncRoute) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(handler(req, res, next)).catch(next);
+  };
+}
+
 export function buildRouter(store: ApiStore, mlClient: MLClient, audit: AuditChain): Router {
   const router = Router();
 
-  router.get("/health", async (_req, res) => {
+  router.get("/health", asyncRoute(async (_req, res) => {
     const mlHealth = await mlClient.health().catch(() => ({ status: "ml_unreachable" }));
     res.json({ status: "ok", ml: mlHealth });
-  });
+  }));
 
-  router.post("/api/ingest", async (req, res) => {
+  router.post("/api/ingest", asyncRoute(async (req, res) => {
     const body = req.body as IngestPayload;
 
     if (!body?.alias || !Array.isArray(body.events) || body.events.length === 0) {
-      return res.status(400).json({ error: "alias and non-empty events[] are required" });
+      res.status(400).json({ error: "alias and non-empty events[] are required" });
+      return;
     }
 
     const contactHash = body.contact_hash ?? hashAlias(body.alias);
@@ -83,12 +92,21 @@ export function buildRouter(store: ApiStore, mlClient: MLClient, audit: AuditCha
     store.appendEvents(contactHash, body.alias, events);
 
     const previousScore = store.getContact(contactHash)?.currentScore ?? 50;
-    const mlOutcome = await mlClient.processContact({
-      contact_hash: contactHash,
-      alias: body.alias,
-      events,
-      previous_score: previousScore,
-    });
+    let mlOutcome;
+    try {
+      mlOutcome = await mlClient.processContact({
+        contact_hash: contactHash,
+        alias: body.alias,
+        events,
+        previous_score: previousScore,
+      });
+    } catch (error) {
+      res.status(502).json({
+        error: "ml_service_unavailable",
+        message: error instanceof Error ? error.message : "ML processing failed",
+      });
+      return;
+    }
 
     const updatedContact = store.applyMLOutcome(contactHash, body.alias, mlOutcome);
 
@@ -111,11 +129,11 @@ export function buildRouter(store: ApiStore, mlClient: MLClient, audit: AuditCha
       actionId: action.id,
     });
 
-    return res.json({
+    res.json({
       contact: updatedContact,
       created_action: action,
     });
-  });
+  }));
 
   router.get("/api/dashboard", (_req, res) => {
     const contacts = store.listContacts();

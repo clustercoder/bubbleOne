@@ -24,7 +24,7 @@ app.use(express.json({ limit: "2mb" }));
 app.use(buildRouter(store, mlClient, audit));
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error(err);
+  console.error("Unhandled API error:", err.message);
   res.status(500).json({ error: "internal_server_error", message: err.message });
 });
 

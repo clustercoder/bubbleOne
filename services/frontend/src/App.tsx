@@ -135,7 +135,9 @@ export default function App() {
                   <button
                     type="button"
                     role="switch"
+                    aria-label="Toggle Privacy Shield"
                     aria-checked={privacyEnabled}
+                    title="Toggle Privacy Shield"
                     onClick={() => setPrivacyEnabled((v) => !v)}
                     className={`relative h-8 w-16 rounded-full border transition ${
                       privacyEnabled

@@ -44,12 +44,16 @@ class EmbeddingClient:
             return np.zeros((0, 384), dtype=np.float32)
 
         if self._openai is not None:
-            response = self._openai.embeddings.create(
-                model=self.settings.openai_embed_model,
-                input=text_list,
-            )
-            vectors = [item.embedding for item in response.data]
-            return np.array(vectors, dtype=np.float32)
+            try:
+                response = self._openai.embeddings.create(
+                    model=self.settings.openai_embed_model,
+                    input=text_list,
+                )
+                vectors = [item.embedding for item in response.data]
+                return np.array(vectors, dtype=np.float32)
+            except Exception:
+                # Fail open to local fallback for resilience (bad key, quota, timeout, etc.).
+                self._openai = None
 
         local_model = self._ensure_local_model()
         if local_model is not None:
