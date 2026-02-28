@@ -205,3 +205,28 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node / frontend
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+coverage/
+
+# Service build/runtime outputs
+services/api/dist/
+services/frontend/dist/
+services/ml/.pytest_cache/
+services/ml/**/__pycache__/
+*.tsbuildinfo
+
+# Local data artifacts (keep synthetic seed sample files committed manually if needed)
+data/*.json
+data/*.sqlite
+data/*.db
+data/*.index
+data/**/*.npy
+data/**/*.ids.json

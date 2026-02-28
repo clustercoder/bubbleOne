@@ -1,0 +1,39 @@
+services:
+  ml:
+    build:
+      context: ./services/ml
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
+      - OPENAI_EMBED_MODEL=${OPENAI_EMBED_MODEL:-text-embedding-3-small}
+      - EMBEDDING_PROVIDER=${EMBEDDING_PROVIDER:-openai}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - LOCAL_LLM_URL=${LOCAL_LLM_URL:-http://localhost:11434/api/generate}
+      - DATA_DIR=/app/data
+    ports:
+      - "${ML_PORT:-8001}:8001"
+    volumes:
+      - ./data:/app/data
+
+  api:
+    build:
+      context: ./services/api
+    environment:
+      - PORT=8000
+      - ML_SERVICE_URL=${ML_SERVICE_URL:-http://ml:8001}
+      - DATA_PATH=/app/data/api_store.json
+      - BLOCKCHAIN_AUDIT=${BLOCKCHAIN_AUDIT:-true}
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - ml
+
+  frontend:
+    build:
+      context: ./services/frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+    depends_on:
+      - api

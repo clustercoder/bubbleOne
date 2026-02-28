@@ -1,0 +1,1297 @@
+[
+  {
+    "timestamp": "2026-01-29T00:14:11+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.244,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-01-29T00:54:38+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.32,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-01-29T03:24:40+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.257,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-01-29T05:39:39+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.593,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-01-29T19:51:22+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.148,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-01-29T23:39:41+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.478,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-01-30T19:31:24+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.799,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-01-30T21:58:51+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": -0.344,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-01-30T22:53:17+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.876,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-01-31T06:13:51+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.082,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-01-31T09:43:13+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.715,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-01-31T10:32:10+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.23,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-01-31T13:50:23+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.426,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-01T02:02:11+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.358,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-01T07:59:06+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.876,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-01T09:33:58+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.486,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-01T11:27:25+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.249,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-01T14:36:21+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.126,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-01T16:42:22+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": -0.218,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-01T23:18:06+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.298,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-02T04:10:14+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.583,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-02T15:22:13+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.1,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-02T19:15:52+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.319,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-02T23:20:12+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.018,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-03T02:52:02+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.232,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-03T06:00:43+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.734,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-03T07:14:31+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.591,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-03T07:19:25+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.459,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-03T07:42:40+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.32,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-03T09:35:22+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.314,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-03T11:11:46+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": -0.087,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-03T19:18:34+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.461,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-03T19:23:42+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.216,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-03T22:45:59+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.431,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-04T08:20:07+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.359,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-04T15:57:02+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.594,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-04T21:25:10+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.365,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-05T07:48:00+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.54,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-05T20:58:45+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.62,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-06T02:44:40+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.72,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-06T03:58:42+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.153,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-06T15:25:19+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.723,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-06T23:31:36+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.123,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-07T01:49:32+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.254,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-07T02:07:45+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.305,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-07T05:59:39+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.881,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-07T06:03:18+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.226,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-07T16:33:58+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.506,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-07T19:40:55+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "call",
+    "sentiment_score": 0.972,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-07T20:14:05+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.538,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-08T02:55:00+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.938,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-08T08:33:48+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.824,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-08T08:41:25+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.23,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-08T08:57:51+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.348,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-08T10:55:21+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.808,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-08T21:15:03+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.011,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-09T04:49:21+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.207,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-09T05:44:36+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.306,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-09T20:29:52+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.934,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-09T23:48:37+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.468,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-10T03:46:17+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.879,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-10T09:08:34+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.239,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-10T09:32:15+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.174,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-10T10:04:25+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.034,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-10T12:29:02+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.425,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-10T20:08:32+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.034,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-11T00:21:07+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.829,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-11T01:27:09+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.811,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-11T05:23:30+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.346,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-11T06:26:46+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.978,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-11T09:02:07+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.624,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-11T12:05:40+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.471,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-11T12:52:37+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.896,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-11T13:55:40+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.227,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-11T19:51:51+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.08,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-11T22:35:51+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.933,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-12T01:00:17+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.862,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-12T08:06:59+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.149,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-12T09:39:55+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.376,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-12T10:08:37+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.13,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-12T12:43:50+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.634,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-12T18:32:48+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.875,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-13T00:03:41+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.648,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-13T07:10:25+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.309,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-13T10:56:03+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.467,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-13T11:25:14+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.88,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-13T13:48:15+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.913,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-13T14:01:28+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.829,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-13T14:39:03+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.599,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-13T14:47:05+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.399,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-13T22:41:18+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.702,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-14T07:46:50+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.632,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-14T22:05:16+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "call",
+    "sentiment_score": 0.518,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-14T23:02:40+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.184,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-15T07:58:03+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.845,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-15T08:10:44+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.233,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-15T08:52:59+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.494,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-15T08:54:52+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.45,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-15T16:54:49+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": -0.076,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-15T16:55:01+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.989,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-15T22:55:44+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.534,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-16T08:42:38+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": -0.299,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-16T09:00:06+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.35,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-16T16:06:48+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.747,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-16T19:56:50+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.193,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-17T00:12:52+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.731,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-17T07:47:23+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.13,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-17T08:01:46+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.045,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-17T15:15:21+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.555,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-17T16:57:49+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.131,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-17T19:39:58+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": -0.204,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-17T21:15:56+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.982,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-18T00:59:12+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.157,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-18T02:58:55+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.574,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-18T06:36:59+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.093,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-18T12:17:16+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.441,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-18T14:43:14+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "call",
+    "sentiment_score": 0.856,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-18T19:26:48+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.112,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-19T00:44:31+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.315,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-19T01:27:56+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.955,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-19T05:57:45+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.903,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-19T07:13:15+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.498,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-19T11:21:28+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.78,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-19T12:44:30+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": -0.311,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-19T13:25:51+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.389,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-19T20:32:00+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.581,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-20T02:30:38+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.044,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-20T10:58:49+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.46,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-20T11:44:05+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.252,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-20T16:24:47+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.204,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-20T16:44:18+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.492,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-20T16:55:31+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.55,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-20T17:50:51+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.849,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-20T18:59:46+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.757,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-20T20:36:17+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.412,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-21T00:37:40+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": -0.112,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-21T06:57:22+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.536,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-21T08:44:59+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.681,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-21T12:14:52+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.706,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-21T17:45:04+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.637,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-21T21:42:19+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "call",
+    "sentiment_score": 0.349,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-22T00:30:54+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.214,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-22T01:59:06+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.507,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-22T06:44:27+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.56,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-22T07:04:03+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.069,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-22T08:23:37+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": -0.15,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-22T13:26:08+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.29,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-22T20:02:20+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.514,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-22T21:27:58+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.528,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-23T02:41:50+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.492,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-23T04:18:45+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.141,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-23T05:25:55+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "call",
+    "sentiment_score": 0.954,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-23T16:02:13+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.855,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-23T16:07:08+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.365,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-23T17:23:36+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": -0.315,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-23T17:52:20+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": -0.384,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-23T22:30:57+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": 0.279,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-23T22:36:39+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.848,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-24T00:05:50+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.496,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-24T05:43:05+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.318,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-24T07:33:55+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.338,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-24T08:25:40+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": -0.032,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-24T22:45:27+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.645,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-25T02:35:59+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.63,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-25T14:39:17+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.55,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-25T15:56:17+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": -0.348,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-25T18:53:41+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.924,
+    "intent": "support"
+  },
+  {
+    "timestamp": "2026-02-25T19:49:36+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": -0.206,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-25T20:43:27+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.605,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-25T20:56:32+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": -0.373,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-25T20:58:49+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.583,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-25T21:58:49+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "text",
+    "sentiment_score": -0.281,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-26T00:02:30+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "call",
+    "sentiment_score": 0.588,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-26T01:58:24+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.07,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-26T03:48:30+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.703,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-26T04:13:14+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "ignored_message",
+    "sentiment_score": -0.636,
+    "intent": "request_help"
+  },
+  {
+    "timestamp": "2026-02-26T14:34:48+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "call",
+    "sentiment_score": 0.595,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-26T15:52:12+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "call",
+    "sentiment_score": 0.543,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-26T17:06:45+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.033,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-27T01:52:44+00:00",
+    "contact_name": "Aarav",
+    "interaction_type": "text",
+    "sentiment_score": 0.314,
+    "intent": "plan_event"
+  },
+  {
+    "timestamp": "2026-02-27T03:23:37+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": 0.694,
+    "intent": "check_in"
+  },
+  {
+    "timestamp": "2026-02-27T04:16:36+00:00",
+    "contact_name": "Priya",
+    "interaction_type": "call",
+    "sentiment_score": 0.239,
+    "intent": "follow_up"
+  },
+  {
+    "timestamp": "2026-02-27T05:45:58+00:00",
+    "contact_name": "Rohan",
+    "interaction_type": "text",
+    "sentiment_score": -0.382,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-27T09:57:18+00:00",
+    "contact_name": "Zane",
+    "interaction_type": "text",
+    "sentiment_score": 0.227,
+    "intent": "small_talk"
+  },
+  {
+    "timestamp": "2026-02-27T17:38:52+00:00",
+    "contact_name": "Maya",
+    "interaction_type": "text",
+    "sentiment_score": 0.865,
+    "intent": "request_help"
+  }
+]
