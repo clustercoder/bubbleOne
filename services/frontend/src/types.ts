@@ -6,13 +6,18 @@ export interface ContactRecord {
   currentScore: number;
   previousScore: number;
   band: ScoreBand;
+  riskLevel: "low" | "medium" | "high";
   recommendation: string;
   actionType: string;
   priority: string;
   scheduleAt: string | null;
   anomalyDetected: boolean;
+  anomalyReason: string;
+  draftMessage: string;
   autoNudgeEnabled: boolean;
   lastUpdatedAt: string;
+  lastInteractionAt: string | null;
+  lastAutoActionAt: string | null;
   eventsCount: number;
 }
 
@@ -22,10 +27,18 @@ export interface ActionItem {
   alias: string;
   type: string;
   text: string;
-  status: "pending" | "completed";
+  status: "pending" | "completed" | "ignored";
+  origin: "user" | "auto";
   scheduledFor: string | null;
   createdAt: string;
   completedAt: string | null;
+  ignoredAt: string | null;
+}
+
+export interface WorkerMeta {
+  lastDailyRecomputeAt: string | null;
+  lastWorkerTickAt: string | null;
+  autoRuns: number;
 }
 
 export interface DashboardResponse {
@@ -37,4 +50,5 @@ export interface DashboardResponse {
     criticalCount: number;
     pendingActions: number;
   };
+  meta: WorkerMeta;
 }

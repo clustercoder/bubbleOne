@@ -233,3 +233,6 @@ data/**/*.ids.json
 
 # Local debug dumps
 bubbleOne-output.txt
+
+README_PPT.md
+README_JUDGES.md

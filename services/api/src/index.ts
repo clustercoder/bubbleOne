@@ -7,6 +7,7 @@ import { AuditChain } from "./audit/chain";
 import { MLClient } from "./clients/mlClient";
 import { buildRouter } from "./routes/index";
 import { ApiStore } from "./store/store";
+import { startAutonomousWorker } from "./worker/autonomousWorker";
 
 const app = express();
 
@@ -31,4 +32,13 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 app.listen(port, () => {
   console.log(`bubbleOne API running on :${port}`);
   console.log(`ML service target: ${mlServiceUrl}`);
+  const stopWorker = startAutonomousWorker(store, mlClient, audit);
+  console.log("Autonomous worker started.");
+
+  const shutdown = () => {
+    stopWorker();
+    process.exit(0);
+  };
+  process.once("SIGINT", shutdown);
+  process.once("SIGTERM", shutdown);
 });

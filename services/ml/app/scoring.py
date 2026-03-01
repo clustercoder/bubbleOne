@@ -15,6 +15,7 @@ class ScoringHyperParams:
     lambda_decay: float = 0.08
     recency_gamma: float = 0.05
     sentiment_weight: float = 6.0
+    interaction_multiplier: float = 1.0
     min_score: float = 0.0
     max_score: float = 100.0
 
@@ -51,6 +52,14 @@ def band_for_score(score: float) -> Band:
     return "critical"
 
 
+def risk_level_for_score(score: float, anomaly_detected: bool = False) -> Literal["low", "medium", "high"]:
+    if anomaly_detected or score < 45:
+        return "high"
+    if score < 70:
+        return "medium"
+    return "low"
+
+
 
 def _days_between(a: datetime, b: datetime) -> float:
     return max((a - b).total_seconds() / 86400.0, 0.0)
@@ -69,7 +78,33 @@ def interaction_impact(
     days_old = _days_between(reference_time, event.ts)
     recency_multiplier = math.exp(-hp.recency_gamma * days_old)
 
-    return (base_weight + intent_weight + sentiment_term) * recency_multiplier
+    return (
+        (base_weight + intent_weight + sentiment_term)
+        * hp.interaction_multiplier
+        * recency_multiplier
+    )
+
+
+def train_temporal_decay(
+    events: Iterable[MetadataEvent],
+    base_lambda: float = 0.08,
+) -> float:
+    event_list = sorted(list(events), key=lambda e: e.ts)
+    if len(event_list) < 2:
+        return round(base_lambda, 4)
+
+    gaps = []
+    for i in range(1, len(event_list)):
+        gap_days = _days_between(event_list[i].ts, event_list[i - 1].ts)
+        gaps.append(gap_days)
+
+    avg_gap = sum(gaps) / max(len(gaps), 1)
+    variability = (max(gaps) - min(gaps)) if gaps else 0.0
+
+    # Higher gap/variability => slightly faster decay. Denser cadence => slower decay.
+    trained = base_lambda + (0.01 * min(avg_gap, 7.0)) + (0.003 * min(variability, 7.0))
+    trained = max(0.03, min(0.2, trained))
+    return round(trained, 4)
 
 
 

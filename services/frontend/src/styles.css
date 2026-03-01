@@ -8,16 +8,169 @@
 
 body {
   @apply m-0 min-h-screen bg-slate-950 text-slate-100 antialiased;
-  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
 }
 
-.glass {
-  @apply border border-slate-700/70 bg-slate-900/60 backdrop-blur-xl;
+.social-shell {
+  background:
+    radial-gradient(900px circle at 0% -15%, rgba(59, 130, 246, 0.16), transparent 55%),
+    radial-gradient(950px circle at 100% -10%, rgba(236, 72, 153, 0.12), transparent 48%),
+    linear-gradient(180deg, #0b1220 0%, #090f1a 42%, #080d16 100%);
 }
 
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-  background-size: 34px 34px;
+.topbar {
+  background: rgba(8, 13, 22, 0.78);
+}
+
+.social-card {
+  @apply border border-slate-700/80 bg-slate-900/70 shadow-[0_12px_40px_-30px_rgba(2,6,23,0.9)] backdrop-blur-xl;
+}
+
+.logo-dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 1), rgba(236, 72, 153, 1));
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.75);
+}
+
+.nav-link {
+  @apply text-slate-400 transition hover:text-slate-100;
+}
+
+.nav-link-active {
+  @apply text-white;
+}
+
+.avatar-circle {
+  @apply flex h-10 w-10 items-center justify-center rounded-full border border-slate-600/90 bg-slate-800 text-sm font-semibold text-slate-100;
+}
+
+.post-card {
+  @apply transition duration-200 hover:border-slate-500/85 hover:bg-slate-900/80;
+}
+
+.badge {
+  @apply rounded-full border px-2.5 py-1 text-[11px] font-medium;
+}
+
+.badge-good {
+  @apply border-emerald-700/80 bg-emerald-900/40 text-emerald-200;
+}
+
+.badge-fading {
+  @apply border-amber-700/80 bg-amber-900/40 text-amber-200;
+}
+
+.badge-critical {
+  @apply border-rose-700/80 bg-rose-900/40 text-rose-200;
+}
+
+.badge-low-risk {
+  @apply border-sky-700/80 bg-sky-900/40 text-sky-200;
+}
+
+.badge-medium-risk {
+  @apply border-violet-700/80 bg-violet-900/35 text-violet-200;
+}
+
+.badge-high-risk {
+  @apply border-rose-700/80 bg-rose-900/40 text-rose-200;
+}
+
+.action-item {
+  @apply transition hover:border-slate-500/80;
+}
+
+.privacy-switch {
+  position: relative;
+  width: 3rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  transition: all 0.2s ease;
+}
+
+.privacy-on {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.55), rgba(168, 85, 247, 0.5));
+  border-color: rgba(125, 211, 252, 0.8);
+}
+
+.privacy-off {
+  background: rgba(51, 65, 85, 0.8);
+  border-color: rgba(100, 116, 139, 0.7);
+}
+
+.privacy-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(2, 6, 23, 0.45);
+  transition: transform 0.2s ease;
+}
+
+.privacy-on .privacy-knob {
+  transform: translateX(1.3rem);
+}
+
+.btn {
+  @apply rounded-lg border px-3 py-1.5 text-xs font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.btn-primary {
+  @apply border-sky-400/45 bg-sky-500/15 text-sky-100 hover:bg-sky-500/25;
+}
+
+.btn-secondary {
+  @apply border-violet-400/45 bg-violet-500/15 text-violet-100 hover:bg-violet-500/25;
+}
+
+.btn-danger {
+  @apply border-rose-400/45 bg-rose-500/15 text-rose-100 hover:bg-rose-500/25;
+}
+
+.btn-ghost {
+  @apply border-slate-600/80 bg-slate-900/70 text-slate-200 hover:border-slate-400;
+}
+
+.score-progress {
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 999px;
+  overflow: hidden;
+  appearance: none;
+  border: 0;
+  background: rgba(51, 65, 85, 0.75);
+}
+
+.score-progress::-webkit-progress-bar {
+  background: rgba(51, 65, 85, 0.75);
+  border-radius: 999px;
+}
+
+.score-progress::-webkit-progress-value {
+  border-radius: 999px;
+}
+
+.score-progress::-moz-progress-bar {
+  border-radius: 999px;
+}
+
+.score-good::-webkit-progress-value,
+.score-good::-moz-progress-bar {
+  background-image: linear-gradient(to right, rgba(16, 185, 129, 0.95), rgba(74, 222, 128, 0.55));
+}
+
+.score-fading::-webkit-progress-value,
+.score-fading::-moz-progress-bar {
+  background-image: linear-gradient(to right, rgba(245, 158, 11, 0.95), rgba(251, 191, 36, 0.55));
+}
+
+.score-critical::-webkit-progress-value,
+.score-critical::-moz-progress-bar {
+  background-image: linear-gradient(to right, rgba(244, 63, 94, 0.95), rgba(251, 113, 133, 0.55));
 }

@@ -16,10 +16,13 @@ class FlowState(TypedDict, total=False):
     current_score: float
     previous_score: float
     recent_metadata: List[Dict[str, Any]]
+    recent_event_count_7d: int
+    prior_event_count_7d: int
     rag_context: str
     anomaly_detected: bool
     anomaly_reason: str
     recommended_action: str
+    draft_message: str
     action_type: str
     priority: str
     schedule_in_hours: int
@@ -41,10 +44,16 @@ class RelationshipFlow:
             float(item.get("sentiment", 0.0)) <= -0.35
             for item in state.get("recent_metadata", [])
         )
-        anomaly = score_drop >= 15.0 or negative_signal
+        recent_freq = int(state.get("recent_event_count_7d", 0))
+        prior_freq = int(state.get("prior_event_count_7d", 0))
+        frequency_drop = prior_freq >= 2 and recent_freq <= int(prior_freq * 0.6)
+
+        anomaly = score_drop >= 15.0 or negative_signal or frequency_drop
 
         reason = "none"
-        if score_drop >= 15.0 and negative_signal:
+        if frequency_drop:
+            reason = "frequency_drop"
+        elif score_drop >= 15.0 and negative_signal:
             reason = "drop_and_negative_sentiment"
         elif score_drop >= 15.0:
             reason = "score_drop"

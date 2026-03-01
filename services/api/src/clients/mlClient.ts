@@ -22,6 +22,11 @@ export class MLClient {
     alias: string;
     events: MetadataEvent[];
     previous_score: number;
+    interaction_multiplier?: number;
+    lambda_decay_override?: number;
+    recent_event_count_7d?: number;
+    prior_event_count_7d?: number;
+    temporal_training_enabled?: boolean;
   }): Promise<MLOutcome> {
     const resp = await this.http.post<MLOutcome>("/v1/process-contact", payload);
     return resp.data;

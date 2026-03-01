@@ -1,6 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { createDraft, getDashboard, ingestSynthetic, sendAction, toggleAutoNudge } from "./api";
+import {
+  createDraft,
+  getDashboard,
+  ignoreAction,
+  ingestSynthetic,
+  sendAction,
+  toggleAutoNudge,
+} from "./api";
 import { ActionItem, ContactRecord, DashboardResponse, ScoreBand } from "./types";
 
 type DraftState = {
@@ -14,25 +21,42 @@ const FRIENDS = ["Alex", "Maya", "Jordan", "Priya", "Sam"];
 const bandStyles: Record<
   ScoreBand,
   {
-    badge: string;
-    rail: string;
     label: string;
+    badge: string;
   }
 > = {
   good: {
-    badge: "bg-emerald-500/20 text-emerald-200 border border-emerald-400/50",
-    rail: "from-emerald-500/50 to-emerald-300/20",
     label: "Good",
+    badge: "badge-good",
   },
   fading: {
-    badge: "bg-amber-500/20 text-amber-200 border border-amber-400/50",
-    rail: "from-amber-500/50 to-amber-300/20",
     label: "Fading",
+    badge: "badge-fading",
   },
   critical: {
-    badge: "bg-rose-500/20 text-rose-200 border border-rose-400/50",
-    rail: "from-rose-500/50 to-rose-300/20",
     label: "Critical",
+    badge: "badge-critical",
+  },
+};
+
+const riskStyles: Record<
+  ContactRecord["riskLevel"],
+  {
+    badge: string;
+    label: string;
+  }
+> = {
+  low: {
+    badge: "badge-low-risk",
+    label: "Low Risk",
+  },
+  medium: {
+    badge: "badge-medium-risk",
+    label: "Medium Risk",
+  },
+  high: {
+    badge: "badge-high-risk",
+    label: "High Risk",
   },
 };
 
@@ -43,6 +67,23 @@ async function withToast<T>(promise: Promise<T>, setError: (msg: string) => void
     setError(error instanceof Error ? error.message : "Request failed");
     return null;
   }
+}
+
+function relativeTime(iso: string | null): string {
+  if (!iso) return "No activity";
+  const ts = new Date(iso).getTime();
+  if (Number.isNaN(ts)) return "No activity";
+
+  const deltaMs = Date.now() - ts;
+  const minutes = Math.floor(deltaMs / 60000);
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes}m ago`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
 }
 
 export default function App() {
@@ -62,8 +103,8 @@ export default function App() {
 
   useEffect(() => {
     refresh();
-    const t = setInterval(refresh, 8000);
-    return () => clearInterval(t);
+    const timer = setInterval(refresh, 5000);
+    return () => clearInterval(timer);
   }, []);
 
   const metrics = dashboard?.metrics ?? {
@@ -73,11 +114,12 @@ export default function App() {
     pendingActions: 0,
   };
 
-  const sortedContacts = useMemo<ContactRecord[]>(() => {
-    return dashboard?.contacts ?? [];
-  }, [dashboard]);
-
-  const actionCards = useMemo<ActionItem[]>(() => dashboard?.actions ?? [], [dashboard]);
+  const contacts = useMemo<ContactRecord[]>(
+    () => [...(dashboard?.contacts ?? [])].sort((a, b) => a.currentScore - b.currentScore),
+    [dashboard],
+  );
+  const actionCards = useMemo<ActionItem[]>(() => (dashboard?.actions ?? []).slice(0, 10), [dashboard]);
+  const workerMeta = dashboard?.meta;
 
   async function onSeed(alias: string) {
     setBusy(true);
@@ -115,201 +157,217 @@ export default function App() {
     setBusy(false);
   }
 
+  async function onIgnore(actionId: string) {
+    setBusy(true);
+    await withToast(ignoreAction(actionId), setError);
+    await refresh();
+    setBusy(false);
+  }
+
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="bg-grid min-h-screen">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-8">
-          <header className="glass rounded-2xl p-5 shadow-neon">
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-sky-300">Social Life on Auto-Pilot</p>
-                <h1 className="mt-2 text-3xl font-semibold tracking-wide text-slate-100">bubbleOne Dashboard</h1>
-                <p className="mt-1 text-sm text-slate-300">
-                  Privacy-first relationship orchestration using metadata, summaries, and local-first automation.
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.14em] text-emerald-200">Privacy Shield</p>
-                <div className="mt-2 flex items-center gap-3">
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-label="Toggle Privacy Shield"
-                    aria-checked={privacyEnabled}
-                    title="Toggle Privacy Shield"
-                    onClick={() => setPrivacyEnabled((v) => !v)}
-                    className={`relative h-8 w-16 rounded-full border transition ${
-                      privacyEnabled
-                        ? "border-emerald-300/70 bg-emerald-400/30"
-                        : "border-slate-500/80 bg-slate-700/70"
-                    }`}
-                  >
-                    <span
-                      className={`absolute top-1 h-6 w-6 rounded-full bg-white transition ${
-                        privacyEnabled ? "left-9" : "left-1"
-                      }`}
-                    />
-                  </button>
-                  <p className="text-sm text-emerald-100">
-                    {privacyEnabled ? "Local metadata mode" : "Cloud assist enabled"}
-                  </p>
-                </div>
-              </div>
+    <main className="social-shell min-h-screen text-slate-100">
+      <header className="topbar sticky top-0 z-40 border-b border-slate-800/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-3">
+            <span className="logo-dot" aria-hidden="true" />
+            <div>
+              <p className="text-sm font-semibold tracking-tight text-white">bubbleOne</p>
+              <p className="text-[11px] text-slate-400">Social Life on Auto-Pilot</p>
             </div>
-          </header>
+          </div>
 
+          <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+            <a className="nav-link nav-link-active" href="#">Home</a>
+            <a className="nav-link" href="#">Orbit</a>
+            <a className="nav-link" href="#">Actions</a>
+          </nav>
+
+          <div className="flex items-center gap-3 rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-2">
+            <span className="text-xs text-slate-300">Privacy</span>
+            <button
+              type="button"
+              role="switch"
+              aria-label="Toggle Privacy Shield"
+              aria-checked={privacyEnabled}
+              title="Toggle Privacy Shield"
+              onClick={() => setPrivacyEnabled((v) => !v)}
+              className={`privacy-switch ${privacyEnabled ? "privacy-on" : "privacy-off"}`}
+            >
+              <span className="privacy-knob" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto grid w-full max-w-7xl gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)_320px]">
+        <aside className="social-card h-fit space-y-4 rounded-2xl p-4 lg:sticky lg:top-20">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">Overview</h2>
+
+          <div className="space-y-2">
+            <StatRow label="Tracked Contacts" value={metrics.contacts.toString()} />
+            <StatRow label="Average Health" value={metrics.avgScore.toFixed(1)} />
+            <StatRow label="Critical" value={metrics.criticalCount.toString()} />
+            <StatRow label="Pending" value={metrics.pendingActions.toString()} />
+          </div>
+
+          <div className="rounded-xl border border-slate-700/80 bg-slate-950/70 p-3">
+            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Worker</p>
+            <p className="mt-1 text-sm text-slate-200">{workerMeta?.lastWorkerTickAt ? "Live" : "Booting"}</p>
+            <p className="mt-1 text-xs text-slate-400">Tick: {relativeTime(workerMeta?.lastWorkerTickAt ?? null)}</p>
+            <p className="text-xs text-slate-400">Auto runs: {workerMeta?.autoRuns ?? 0}</p>
+          </div>
+
+          <div>
+            <p className="mb-2 text-xs uppercase tracking-[0.14em] text-slate-400">Quick Seed</p>
+            <div className="flex flex-wrap gap-2">
+              {FRIENDS.map((alias) => (
+                <button
+                  key={alias}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => onSeed(alias)}
+                  className="btn btn-ghost"
+                >
+                  {alias}
+                </button>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <section className="space-y-4">
           {error ? (
-            <div className="rounded-xl border border-rose-400/50 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            <div className="social-card rounded-xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">
               {error}
             </div>
           ) : null}
 
-          <section className="grid gap-4 md:grid-cols-4">
-            <MetricCard label="Contacts" value={metrics.contacts.toString()} tone="sky" />
-            <MetricCard label="Average Score" value={metrics.avgScore.toString()} tone="amber" />
-            <MetricCard label="Critical" value={metrics.criticalCount.toString()} tone="rose" />
-            <MetricCard label="Pending Actions" value={metrics.pendingActions.toString()} tone="emerald" />
-          </section>
+          {contacts.length === 0 ? (
+            <div className="social-card rounded-2xl p-5 text-sm text-slate-300">
+              No contacts yet. Use quick seed buttons on the left.
+            </div>
+          ) : null}
 
-          <section className="grid gap-6 lg:grid-cols-[1.35fr_1fr]">
-            <article className="glass rounded-3xl p-6">
-              <div className="mb-5 flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-sky-200">Relationship Orbit (List Mode)</h2>
-                <span className="text-xs uppercase tracking-[0.12em] text-slate-400">0-100 health score</span>
-              </div>
+          {contacts.map((contact) => {
+            const band = bandStyles[contact.band];
+            const risk = riskStyles[contact.riskLevel];
+            const scoreDelta = contact.currentScore - contact.previousScore;
+            const deltaTone = scoreDelta >= 0 ? "text-emerald-300" : "text-rose-300";
+            const deltaLabel = `${scoreDelta >= 0 ? "+" : ""}${scoreDelta.toFixed(1)}`;
 
-              <div className="space-y-3">
-                {sortedContacts.length === 0 ? (
-                  <p className="rounded-xl border border-slate-700/60 bg-slate-900/70 p-4 text-sm text-slate-300">
-                    No contacts yet. Use demo ingest controls to populate the dashboard.
-                  </p>
-                ) : null}
-
-                {sortedContacts.map((contact) => {
-                  const style = bandStyles[contact.band];
-                  return (
-                    <div key={contact.contactHash} className="rounded-2xl border border-slate-700/70 bg-slate-900/75 p-4">
-                      <div className="flex flex-wrap items-start justify-between gap-3">
-                        <div>
-                          <div className="flex items-center gap-3">
-                            <h3 className="text-lg font-medium text-slate-100">{contact.alias}</h3>
-                            <span className={`rounded-full px-2 py-1 text-xs ${style.badge}`}>{style.label}</span>
-                          </div>
-                          <p className="mt-1 text-sm text-slate-300">{contact.recommendation}</p>
-                        </div>
-
-                        <div className="text-right">
-                          <p className="text-2xl font-semibold text-slate-100">{contact.currentScore.toFixed(1)}</p>
-                          <p className="text-xs text-slate-400">prev {contact.previousScore.toFixed(1)}</p>
-                        </div>
-                      </div>
-
-                      <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-700">
-                        <div
-                          className={`h-full rounded-full bg-gradient-to-r ${style.rail}`}
-                          style={{ width: `${Math.min(100, Math.max(0, contact.currentScore))}%` }}
-                        />
-                      </div>
-
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        <button
-                          type="button"
-                          disabled={busy}
-                          onClick={() => onCreateDraft(contact.contactHash)}
-                          className="rounded-lg border border-sky-300/40 bg-sky-400/10 px-3 py-1.5 text-xs font-medium text-sky-200 hover:bg-sky-300/20 disabled:opacity-50"
-                        >
-                          Draft + Send
-                        </button>
-                        <button
-                          type="button"
-                          disabled={busy}
-                          onClick={() => onToggleAutoNudge(contact)}
-                          className="rounded-lg border border-amber-300/40 bg-amber-400/10 px-3 py-1.5 text-xs font-medium text-amber-100 hover:bg-amber-300/20 disabled:opacity-50"
-                        >
-                          {contact.autoNudgeEnabled ? "Disable Auto-Nudge" : "Enable Auto-Nudge"}
-                        </button>
-                      </div>
+            return (
+              <article key={contact.contactHash} className="social-card post-card rounded-2xl p-4 sm:p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex min-w-0 items-start gap-3">
+                    <div className="avatar-circle" aria-hidden="true">
+                      {contact.alias.slice(0, 1).toUpperCase()}
                     </div>
-                  );
-                })}
-              </div>
-            </article>
-
-            <aside className="glass rounded-3xl p-6">
-              <h2 className="text-xl font-semibold text-amber-200">Action Center</h2>
-              <p className="mt-1 text-sm text-slate-300">
-                Suggestions generated by LangGraph workflow and RAG memory.
-              </p>
-
-              <div className="mt-4 space-y-3">
-                {actionCards.length === 0 ? (
-                  <p className="rounded-xl border border-slate-700/70 bg-slate-950/60 p-4 text-sm text-slate-300">
-                    No pending actions yet.
-                  </p>
-                ) : null}
-
-                {actionCards.map((action) => (
-                  <div key={action.id} className="rounded-xl border border-slate-700/70 bg-slate-950/70 p-4">
-                    <p className="text-sm text-slate-100">{action.text}</p>
-                    <div className="mt-3 flex items-center justify-between gap-2">
-                      <span className="text-xs uppercase tracking-[0.12em] text-slate-400">{action.type}</span>
-                      <button
-                        type="button"
-                        disabled={busy}
-                        onClick={() => onSend(action.id)}
-                        className="rounded-md border border-emerald-300/40 bg-emerald-500/15 px-2.5 py-1 text-xs text-emerald-200 hover:bg-emerald-400/25 disabled:opacity-50"
-                      >
-                        Mark Completed
-                      </button>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="truncate text-base font-semibold text-white">{contact.alias}</h3>
+                        <span className={`badge ${band.badge}`}>{band.label}</span>
+                        <span className={`badge ${risk.badge}`}>{risk.label}</span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-slate-400">{relativeTime(contact.lastInteractionAt)}</p>
                     </div>
                   </div>
-                ))}
-              </div>
 
-              <div className="mt-6 rounded-2xl border border-sky-400/40 bg-sky-500/10 p-4">
-                <p className="text-xs uppercase tracking-[0.14em] text-sky-200">Demo Ingest</p>
-                <p className="mt-1 text-sm text-sky-100/90">Inject synthetic metadata for quick scoring/recommendation demos.</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {FRIENDS.map((alias) => (
-                    <button
-                      key={alias}
-                      type="button"
-                      disabled={busy}
-                      onClick={() => onSeed(alias)}
-                      className="rounded-md border border-slate-600/80 bg-slate-900/80 px-3 py-1 text-xs text-slate-200 hover:border-sky-300/60 disabled:opacity-50"
-                    >
-                      Ingest {alias}
-                    </button>
-                  ))}
+                  <div className="text-right">
+                    <p className="text-2xl font-semibold text-white">{contact.currentScore.toFixed(1)}</p>
+                    <p className={`text-xs ${deltaTone}`}>{deltaLabel}</p>
+                  </div>
+                </div>
+
+                <p className="mt-3 text-sm leading-relaxed text-slate-200">{contact.recommendation}</p>
+                {contact.anomalyDetected ? (
+                  <p className="mt-1 text-xs text-rose-300">Anomaly detected: {contact.anomalyReason}</p>
+                ) : null}
+
+                <div className="mt-3">
+                  <progress
+                    max={100}
+                    value={Math.min(100, Math.max(0, contact.currentScore))}
+                    className={`score-progress score-${contact.band}`}
+                  />
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => onCreateDraft(contact.contactHash)}
+                    className="btn btn-primary"
+                  >
+                    Draft + Send
+                  </button>
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => onToggleAutoNudge(contact)}
+                    className="btn btn-secondary"
+                  >
+                    {contact.autoNudgeEnabled ? "Disable Auto-Nudge" : "Enable Auto-Nudge"}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </section>
+
+        <aside className="social-card h-fit rounded-2xl p-4 lg:sticky lg:top-20">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">Action Center</h2>
+          <p className="mt-1 text-xs text-slate-400">Auto + user tasks waiting for execution</p>
+
+          <div className="mt-4 space-y-3">
+            {actionCards.length === 0 ? (
+              <div className="rounded-xl border border-slate-700/70 bg-slate-950/65 p-4 text-sm text-slate-300">
+                No pending actions.
+              </div>
+            ) : null}
+
+            {actionCards.map((action) => (
+              <div key={action.id} className="action-item rounded-xl border border-slate-700/70 bg-slate-950/60 p-3">
+                <p className="text-sm text-slate-200">{action.text}</p>
+                <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-slate-400">
+                  {action.type} • {action.origin}
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => onIgnore(action.id)}
+                    className="btn btn-danger"
+                  >
+                    Ignore
+                  </button>
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => onSend(action.id)}
+                    className="btn btn-primary"
+                  >
+                    Complete
+                  </button>
                 </div>
               </div>
-            </aside>
-          </section>
-        </div>
+            ))}
+          </div>
+        </aside>
       </div>
 
       {draft ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/80 px-4">
-          <div className="w-full max-w-lg rounded-2xl border border-slate-700/80 bg-slate-900 p-5">
-            <h3 className="text-lg font-semibold text-slate-100">Draft for {draft.alias}</h3>
-            <p className="mt-3 rounded-lg border border-slate-700/70 bg-slate-950/70 p-3 text-sm text-slate-200">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/75 px-4 backdrop-blur-sm">
+          <div className="social-card w-full max-w-xl rounded-2xl p-5 sm:p-6">
+            <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Draft Composer</p>
+            <h3 className="mt-2 text-xl font-semibold text-white">Message for {draft.alias}</h3>
+            <p className="mt-4 rounded-xl border border-slate-700/80 bg-slate-950/70 p-4 text-sm text-slate-200">
               {draft.text}
             </p>
-            <div className="mt-4 flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => setDraft(null)}
-                className="rounded-md border border-slate-600 px-3 py-1.5 text-sm text-slate-300"
-              >
+            <div className="mt-5 flex justify-end gap-2">
+              <button type="button" onClick={() => setDraft(null)} className="btn btn-ghost">
                 Close
               </button>
-              <button
-                type="button"
-                disabled={busy}
-                onClick={() => onSend(draft.actionId)}
-                className="rounded-md border border-emerald-300/50 bg-emerald-500/20 px-3 py-1.5 text-sm text-emerald-200 disabled:opacity-50"
-              >
+              <button type="button" disabled={busy} onClick={() => onSend(draft.actionId)} className="btn btn-primary">
                 Mock Send
               </button>
             </div>
@@ -320,26 +378,11 @@ export default function App() {
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  tone,
-}: {
-  label: string;
-  value: string;
-  tone: "sky" | "amber" | "rose" | "emerald";
-}) {
-  const toneMap = {
-    sky: "text-sky-200 border-sky-300/30",
-    amber: "text-amber-200 border-amber-300/30",
-    rose: "text-rose-200 border-rose-300/30",
-    emerald: "text-emerald-200 border-emerald-300/30",
-  } as const;
-
+function StatRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className={`glass rounded-xl border p-4 ${toneMap[tone]}`}>
-      <p className="text-xs uppercase tracking-[0.14em] text-slate-400">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-slate-100">{value}</p>
+    <div className="flex items-center justify-between rounded-lg border border-slate-700/80 bg-slate-950/65 px-3 py-2">
+      <span className="text-xs text-slate-400">{label}</span>
+      <span className="text-sm font-semibold text-white">{value}</span>
     </div>
   );
 }

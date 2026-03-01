@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 
 from app.models import MetadataEvent
-from app.scoring import clamp_score, compute_relationship_score
+from app.scoring import clamp_score, compute_relationship_score, risk_level_for_score, train_temporal_decay
 
 
 
@@ -97,3 +97,21 @@ def test_score_always_stays_between_zero_and_hundred() -> None:
 
     score = compute_relationship_score(events, previous_score=95.0, as_of=now)
     assert 0.0 <= score <= 100.0
+
+
+def test_temporal_decay_training_stays_in_bounds() -> None:
+    now = datetime(2026, 2, 28, tzinfo=timezone.utc)
+    events = [
+        _event(idx=1, interaction_type="text", sentiment=0.3, ts=now - timedelta(days=10)),
+        _event(idx=2, interaction_type="call", sentiment=0.4, ts=now - timedelta(days=7)),
+        _event(idx=3, interaction_type="ignored_message", sentiment=-0.2, ts=now - timedelta(days=1)),
+    ]
+
+    trained = train_temporal_decay(events, base_lambda=0.08)
+    assert 0.03 <= trained <= 0.2
+
+
+def test_risk_level_escalates_with_anomaly() -> None:
+    assert risk_level_for_score(82.0, anomaly_detected=False) == "low"
+    assert risk_level_for_score(60.0, anomaly_detected=False) == "medium"
+    assert risk_level_for_score(82.0, anomaly_detected=True) == "high"

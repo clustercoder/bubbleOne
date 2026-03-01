@@ -16,7 +16,7 @@ from .models import (
     ScoreRequest,
 )
 from .rag_store import RagStore
-from .scoring import band_for_score, compute_relationship_score
+from .scoring import ScoringHyperParams, band_for_score, compute_relationship_score, risk_level_for_score, train_temporal_decay
 
 settings = get_settings()
 embedder = EmbeddingClient(settings)
@@ -82,15 +82,19 @@ def recommend(payload: RecommendRequest) -> Dict[str, Any]:
         "alias": payload.alias,
         "current_score": payload.current_score,
         "previous_score": payload.previous_score,
+        "recent_event_count_7d": len(payload.recent_metadata),
+        "prior_event_count_7d": max(len(payload.recent_metadata) - 2, 0),
         "recent_metadata": [event.model_dump(mode="json") for event in payload.recent_metadata],
     }
     result = flow.run(state)
     return {
         "recommended_action": result.get("recommended_action", "No recommendation."),
+        "draft_message": result.get("draft_message", "Hey there, checking in. How are you doing this week?"),
         "action_type": result.get("action_type", "reminder"),
         "priority": result.get("priority", "medium"),
         "schedule_at": result.get("schedule_at"),
         "anomaly_detected": result.get("anomaly_detected", False),
+        "anomaly_reason": result.get("anomaly_reason", "none"),
     }
 
 
@@ -98,9 +102,21 @@ def recommend(payload: RecommendRequest) -> Dict[str, Any]:
 def process_contact(payload: ProcessContactRequest) -> ProcessContactResponse:
     ingest(IngestRequest(events=payload.events))
 
+    base_lambda = payload.lambda_decay_override if payload.lambda_decay_override is not None else 0.08
+    lambda_used = (
+        train_temporal_decay(payload.events, base_lambda=base_lambda)
+        if payload.temporal_training_enabled
+        else base_lambda
+    )
+    hp = ScoringHyperParams(
+        lambda_decay=lambda_used,
+        interaction_multiplier=payload.interaction_multiplier,
+    )
+
     final_score = compute_relationship_score(
         events=payload.events,
         previous_score=payload.previous_score,
+        hp=hp,
     )
     band = band_for_score(final_score)
 
@@ -109,17 +125,27 @@ def process_contact(payload: ProcessContactRequest) -> ProcessContactResponse:
         "alias": payload.alias,
         "current_score": final_score,
         "previous_score": payload.previous_score,
+        "recent_event_count_7d": payload.recent_event_count_7d,
+        "prior_event_count_7d": payload.prior_event_count_7d,
         "recent_metadata": [event.model_dump(mode="json") for event in payload.events[-10:]],
     }
     outcome = flow.run(flow_state)
+    anomaly_detected = bool(outcome.get("anomaly_detected", False))
 
     return ProcessContactResponse(
         contact_hash=payload.contact_hash,
         score=final_score,
         band=band,
+        risk_level=risk_level_for_score(final_score, anomaly_detected=anomaly_detected),
         recommended_action=outcome.get("recommended_action", "No recommendation."),
+        draft_message=outcome.get(
+            "draft_message",
+            f"Hey {payload.alias}, just checking in. Want to catch up this week?",
+        ),
         action_type=outcome.get("action_type", "reminder"),
         priority=outcome.get("priority", "medium"),
         schedule_at=outcome.get("schedule_at"),
-        anomaly_detected=bool(outcome.get("anomaly_detected", False)),
+        anomaly_detected=anomaly_detected,
+        anomaly_reason=outcome.get("anomaly_reason", "none"),
+        lambda_decay_used=lambda_used,
     )

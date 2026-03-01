@@ -23,6 +23,10 @@ services:
       - ML_SERVICE_URL=${ML_SERVICE_URL:-http://ml:8001}
       - DATA_PATH=/app/data/api_store.json
       - BLOCKCHAIN_AUDIT=${BLOCKCHAIN_AUDIT:-true}
+      - WORKER_TICK_MS=${WORKER_TICK_MS:-15000}
+      - AUTO_DRAFT_THRESHOLD=${AUTO_DRAFT_THRESHOLD:-45}
+      - AUTO_ACTION_COOLDOWN_HOURS=${AUTO_ACTION_COOLDOWN_HOURS:-6}
+      - AUTO_IGNORE_HOURS=${AUTO_IGNORE_HOURS:-24}
     ports:
       - "${API_PORT:-8000}:8000"
     volumes:

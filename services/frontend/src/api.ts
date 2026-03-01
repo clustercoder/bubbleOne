@@ -65,6 +65,13 @@ export async function sendAction(actionId: string): Promise<void> {
   });
 }
 
+export async function ignoreAction(actionId: string): Promise<void> {
+  await apiFetch("/api/actions/ignore", {
+    method: "POST",
+    body: JSON.stringify({ actionId }),
+  });
+}
+
 export async function toggleAutoNudge(contactHash: string, enabled: boolean): Promise<void> {
   await apiFetch("/api/actions/auto-nudge", {
     method: "POST",
