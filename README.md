@@ -8,6 +8,28 @@ This repository is designed to be understandable for two audiences at once:
 
 ---
 
+## Diagrams
+
+![bubbleOne UI - Screenshot 1](<images/Screenshot 2026-03-01 at 4.32.27 AM.png>)
+
+![bubbleOne UI - Screenshot 2](<images/Screenshot 2026-03-01 at 4.33.07 AM.png>)
+
+![bubbleOne UI - Screenshot 3](<images/Screenshot 2026-03-01 at 4.35.33 AM.png>)
+
+![bubbleOne UI - Screenshot 4](<images/Screenshot 2026-03-01 at 4.38.29 AM.png>)
+
+ 
+---
+
+## Screenshots
+
+![bubbleOne UI - Screenshot 1](<images/Screenshot 2026-03-01 at 10.22.30 AM.png>)
+
+![bubbleOne UI - Screenshot 2](<images/Screenshot 2026-03-01 at 10.22.37 AM.png>)
+
+
+---
+
 ## 1) What This Project Is
 
 `bubbleOne` is an autonomous relationship copilot that uses **communication metadata** (not raw chat text) to:
@@ -455,6 +477,15 @@ Pending queue with:
 - lets user close or mock-send,
 - sending closes loop and updates tuning.
 
+## 15.6 UI Screenshots
+![bubbleOne UI - Screenshot 1](<images/Screenshot 2026-03-01 at 4.32.27 AM.png>)
+
+![bubbleOne UI - Screenshot 2](<images/Screenshot 2026-03-01 at 4.33.07 AM.png>)
+
+![bubbleOne UI - Screenshot 3](<images/Screenshot 2026-03-01 at 4.35.33 AM.png>)
+
+![bubbleOne UI - Screenshot 4](<images/Screenshot 2026-03-01 at 4.38.29 AM.png>)
+
 ---
 
 ## 16) Privacy and Security Posture
@@ -645,7 +676,4 @@ bubbleOne is a privacy-first autonomous relationship copilot that transforms met
 
 ---
 
-## 25) Companion Readmes
 
-- [PPT deck content and slide blueprint](/Users/manteksinghburn/bubbleOne/README_PPT.md)
-- [Judge presentation playbook and mock Q&A](/Users/manteksinghburn/bubbleOne/README_JUDGES.md)
